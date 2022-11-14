@@ -23,19 +23,6 @@ def odin_deps():
         sha256 = "74d544d96f4a5bb630d465ca8bbcfe231e3594e5aae57e1edbf17a6eb3ca2506",
     )
 
-    #maybe(
-    #    http_archive,
-    #    name = "mkl_dnn_v1",
-    #    build_file = "//bazel/third_party/mkl_dnn:mkldnn_v1.BUILD",
-    #    sha256 = "5369f7b2f0b52b40890da50c0632c3a5d1082d98325d0f2bff125d19d0dcaa1d",
-    #    strip_prefix = "oneDNN-1.6.4",
-    #    urls = [
-    #        "https://storage.googleapis.com/mirror.tensorflow.org/github.com/oneapi-src/oneDNN/archive/v1.6.4.tar.gz",
-    #        "https://github.com/oneapi-src/oneDNN/archive/v1.6.4.tar.gz",
-    #    ],
-    #)
-
-    # Does not work
     maybe(
         http_archive,
         name = "mkl_dnn_v1",

@@ -12,7 +12,7 @@ expand_template(
     out = "include/OpenImageDenoise/config.h",
     substitutions = {
         "#cmakedefine OIDN_STATIC_LIB": "",
-        "#cmakedefine OIDN_API_NAMESPACE": "oidn",
+        "#cmakedefine OIDN_API_NAMESPACE": "",
     },
     template = "include/OpenImageDenoise/config.h.in",
 )
@@ -36,5 +36,8 @@ cc_library(
         "include/OpenImageDenoise/oidn.hpp",
     ],
     includes = ["include/OpenImageDenoise"],
-    deps = ["@mkl_dnn_v1//:mkl_dnn", "@oneTBB//:tbb"],
+    deps = [
+        "@mkl_dnn_v1//:mkl_dnn",
+        "@oneTBB//:tbb",
+    ],
 )
