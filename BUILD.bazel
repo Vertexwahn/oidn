@@ -31,9 +31,10 @@ cc_library(
         "common/thread.cpp",
         "common/thread.h",
         "common/timer.h",
-        "include/OpenImageDenoise/oidn.hpp",
+        "include/OpenImageDenoise/config.h",  # generted
         "include/OpenImageDenoise/oidn.h",
-        "include/OpenImageDenoise/config.h", # generted
+        "include/OpenImageDenoise/oidn.hpp",
     ],
     includes = ["include/OpenImageDenoise"],
+    deps = ["@mkl_dnn_v1//:mkl_dnn", "@oneTBB//:tbb"],
 )
