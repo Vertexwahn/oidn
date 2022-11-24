@@ -14,6 +14,11 @@ expand_template(
     substitutions = {
         "#cmakedefine OIDN_STATIC_LIB": "",
         "#cmakedefine OIDN_API_NAMESPACE": "",
+        "@OIDN_VERSION_MAJOR@": "1",
+        "@OIDN_VERSION_MINOR@": "4",
+        "@OIDN_VERSION_PATCH@": "3",
+        "@OIDN_VERSION_NUMBER@": "1.4.3",
+        "@OIDN_VERSION_NOTE": "muh",
     },
     template = "include/OpenImageDenoise/config.h.in",
 )
