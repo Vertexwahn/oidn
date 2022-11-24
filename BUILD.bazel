@@ -17,7 +17,7 @@ expand_template(
         "@OIDN_VERSION_MAJOR@": "1",
         "@OIDN_VERSION_MINOR@": "4",
         "@OIDN_VERSION_PATCH@": "3",
-        "@OIDN_VERSION_NUMBER@": "1.4.3",
+        "@OIDN_VERSION_NUMBER@": "010403",
         "@OIDN_VERSION_NOTE": "muh",
     },
     template = "include/OpenImageDenoise/config.h.in",
@@ -163,6 +163,7 @@ cc_library(
         "include/OpenImageDenoise/oidn.h",
         "include/OpenImageDenoise/oidn.hpp",
     ],
+    defines = ["OIDN_DNNL"],
     includes = ["core"],
     #textual_hdrs = [
     #"core/image.isph",
