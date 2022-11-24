@@ -6,6 +6,7 @@
 ## optimization gaps.
 
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("@rules_ispc//:ispc.bzl", "ispc_cc_library")
 
 expand_template(
     name = "config",
@@ -15,6 +16,77 @@ expand_template(
         "#cmakedefine OIDN_API_NAMESPACE": "",
     },
     template = "include/OpenImageDenoise/config.h.in",
+)
+
+ispc_cc_library(
+    name = "input_reorder_ispc",
+    srcs = [
+        "core/color.isph",
+        "core/image.isph",
+        "core/input_reorder.ispc",
+        "core/math.isph",
+        "core/reorder.isph",
+        "core/tensor.isph",
+        "core/vec.isph",
+    ],
+    out = "input_reorder_ispc.h",
+    ispc_main_source_file = "core/input_reorder.ispc",
+)
+
+ispc_cc_library(
+    name = "color_ispc",
+    srcs = [
+        "core/color.ispc",
+        "core/color.isph",
+        "core/image.isph",
+        "core/math.isph",
+        "core/vec.isph",
+    ],
+    out = "color_ispc.h",
+    ispc_main_source_file = "core/color.ispc",
+)
+
+ispc_cc_library(
+    name = "output_copy_ispc",
+    srcs = [
+        "core/color.isph",
+        "core/image.isph",
+        "core/math.isph",
+        "core/output_copy.ispc",
+        "core/vec.isph",
+    ],
+    out = "output_copy_ispc.h",
+    ispc_main_source_file = "core/output_copy.ispc",
+)
+
+ispc_cc_library(
+    name = "upsample_ispc",
+    srcs = [
+        "core/tensor.isph",
+        "core/upsample.ispc",
+        "core/vec.isph",
+
+        "core/color.isph",
+        "core/image.isph",
+        "core/math.isph",
+    ],
+    out = "upsample_ispc.h",
+    ispc_main_source_file = "core/upsample.ispc",
+)
+
+ispc_cc_library(
+    name = "output_reorder_ispc",
+    srcs = [
+        "core/color.isph",
+        "core/image.isph",
+        "core/math.isph",
+        "core/output_reorder.ispc",
+        "core/reorder.isph",
+        "core/tensor.isph",
+        "core/vec.isph",
+    ],
+    out = "output_reorder_ispc.h",
+    ispc_main_source_file = "core/output_reorder.ispc",
 )
 
 cc_library(
@@ -87,20 +159,25 @@ cc_library(
         "include/OpenImageDenoise/oidn.hpp",
     ],
     includes = ["core"],
-    textual_hdrs = [
-        "core/image.isph",
-        "core/input_reorder.ispc",
-        "core/color.isph",
-        "core/color.ispc",
-        "core/math.isph",
-        "core/upsample.ispc",
-        "core/output_copy.ispc",
-        "core/output_reorder.ispc",
-        "core/reorder.isph",
-        "core/tensor.isph",
-        "core/vec.isph",
-    ],
+    #textual_hdrs = [
+    #"core/image.isph",
+    #"core/input_reorder.ispc",
+    #"core/color.isph",
+    #"core/color.ispc",
+    #"core/math.isph",
+    #"core/upsample.ispc",
+    #"core/output_copy.ispc",
+    #"core/output_reorder.ispc",
+    #"core/reorder.isph",
+    #"core/tensor.isph",
+    #"core/vec.isph",
+    #],
     deps = [
+        ":color_ispc",
         ":common",
+        ":input_reorder_ispc",
+        ":output_copy_ispc",
+        ":output_reorder_ispc",
+        ":upsample_ispc",
     ],
 )

@@ -7,6 +7,7 @@
 
 workspace(name = "oidn")
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("//:bazel/odin_deps.bzl", "odin_deps")
 
 odin_deps()
@@ -14,3 +15,26 @@ odin_deps()
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+local_repository(
+    name = "rules_ispc",
+    path = "rules_ispc",
+)
+
+#git_repository(
+#    name = "rules_ispc",
+#    commit = "0deccfa15c73ce93d3850e618cf647fe979d6fbc",
+#    #branch = "main",
+#    remote = "https://github.com/Vertexwahn/rules_ispc",
+#    shallow_since = "1669327440 +0100",
+#)
+
+load("@rules_ispc//:fetch_ispc.bzl", "fetch_ispc")
+
+fetch_ispc()
+
+load("@rules_ispc//tools:ispc_toolchain.bzl", "register_ispc_toolchains")
+
+register_ispc_toolchains()
