@@ -67,13 +67,12 @@ ispc_cc_library(
 ispc_cc_library(
     name = "upsample_ispc",
     srcs = [
-        "core/tensor.isph",
-        "core/upsample.ispc",
-        "core/vec.isph",
-
         "core/color.isph",
         "core/image.isph",
         "core/math.isph",
+        "core/tensor.isph",
+        "core/upsample.ispc",
+        "core/vec.isph",
     ],
     out = "upsample_ispc.h",
     ispc_main_source_file = "core/upsample.ispc",
@@ -159,12 +158,18 @@ cc_library(
         "core/upsample.cpp",
         "core/upsample.h",
         "core/vec.h",
+    ],
+    hdrs = [
         "include/OpenImageDenoise/config.h",
         "include/OpenImageDenoise/oidn.h",
         "include/OpenImageDenoise/oidn.hpp",
     ],
     defines = ["OIDN_DNNL"],
-    includes = ["core"],
+    includes = [
+        "core",
+        "include",
+    ],
+    visibility = ["//visibility:public"],
     #textual_hdrs = [
     #"core/image.isph",
     #"core/input_reorder.ispc",
