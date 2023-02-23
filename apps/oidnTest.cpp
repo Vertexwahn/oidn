@@ -9,8 +9,8 @@
 
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_FAST_COMPILE
-#include "catch.hpp"
-
+//#include "catch.hpp"
+#include "catch2/catch_test_macros.hpp"
 OIDN_NAMESPACE_USING
 using namespace oidn;
 

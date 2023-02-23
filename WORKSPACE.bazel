@@ -53,3 +53,14 @@ git_repository(
 load("@com_openexr//:bazel/third_party/openexr_deps.bzl", "openexr_deps")
 
 openexr_deps()
+
+#-------------------------------------------------------------------------------------
+# Catch2
+#-------------------------------------------------------------------------------------
+
+http_archive(
+    name = "catch2",
+    sha256 = "d90351cdc55421f640c553cfc0875a8c834428679444e8062e9187d05b18aace",
+    strip_prefix = "Catch2-3.3.1",
+    url = "https://github.com/catchorg/Catch2/archive/refs/tags/v3.3.1.tar.gz",
+)

@@ -224,3 +224,16 @@ cc_library(
         ":upsample_ispc",
     ],
 )
+
+cc_test(
+    name = "test",
+    srcs = [
+        "apps/oidnTest.cpp",
+        "apps/utils/image_io.cpp",
+        "apps/utils/image_io.h",
+    ],
+    deps = [
+        ":OpenImageDenoise",
+        "@catch2//:catch2_main",
+    ],
+)

@@ -19,6 +19,8 @@ using namespace Imath;
 #include <cassert>
 #include <cfloat>
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -222,13 +224,15 @@ int main() {
     // Filter the image
     filter.execute();
 
+    std::this_thread::sleep_for(2000ms);
+
     // Check for errors
     const char* errorMessage;
     if (device.getError(errorMessage) != oidn::Error::None) {
         std::cout << "Error: " << errorMessage << std::endl;
     }
 
-    store_open_exr("/home/vertexwahn/Desktop/denoised_add64_2.exr", out);
+    store_open_exr("/home/vertexwahn/Desktop/denoised_add64_3.exr", out);
 
     return 0;
 }
