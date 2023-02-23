@@ -1,27 +1,13 @@
 # Copied from TensorFlow Apache-2.0 license
+# https://github.com/tensorflow/tensorflow/blob/master/third_party/mkl_dnn/mkldnn_v1.BUILD
 
 exports_files(["LICENSE"])
 
-#load(
-#    "@org_tensorflow//third_party/mkl:build_defs.bzl",
-#    "if_mkl",
-#)
-#load(
-#    "@org_tensorflow//tensorflow:tensorflow.bzl",
-#    "tf_openmp_copts",
-#)
-#load(
-#    "@org_tensorflow//third_party/mkl_dnn:build_defs.bzl",
-#    "if_mkldnn_openmp",
-#)
-#load(
-#    "@org_tensorflow//third_party/mkl:build_defs.bzl",
-#    "if_mkl_ml",
-#)
-load(
-    "@bazel_skylib//rules:expand_template.bzl",
-    "expand_template",
-)
+#load("@org_tensorflow//tensorflow:tensorflow.bzl", "tf_openmp_copts")
+#load("@org_tensorflow//third_party/mkl:build_defs.bzl", "if_mkl")
+#load("@org_tensorflow//third_party/mkl_dnn:build_defs.bzl", "if_mkldnn_openmp")
+#load("@org_tensorflow//third_party/mkl:build_defs.bzl", "if_mkl_ml")
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 
 _CMAKE_COMMON_LIST = {
     "#cmakedefine DNNL_GPU_RUNTIME DNNL_RUNTIME_${DNNL_GPU_RUNTIME}": "#define DNNL_GPU_RUNTIME DNNL_RUNTIME_NONE",
@@ -113,6 +99,7 @@ expand_template(
 
 _COPTS_LIST = select({
     #"@org_tensorflow//tensorflow:windows": [],
+    "@platforms//os:windows": [],
     "//conditions:default": ["-fexceptions"],
 }) + [
     "-UUSE_MKL",
@@ -169,6 +156,7 @@ cc_library(
             "src/cpu/**/*.cpp",
             "src/common/ittnotify/*.c",
             "src/cpu/jit_utils/**/*.cpp",
+            #"src/cpu/aarch64/**", # macOS M1
         ],
         exclude = [
             "src/cpu/aarch64/**",
@@ -182,6 +170,7 @@ cc_library(
         #"@org_tensorflow//tensorflow:linux_aarch64": ["-lrt"],
         #"@org_tensorflow//tensorflow:linux_x86_64": ["-lrt"],
         #"@org_tensorflow//tensorflow:linux_ppc64le": ["-lrt"],
+        "@platforms//os:linux": ["-lrt"],
         "//conditions:default": [],
     }),
     textual_hdrs = _TEXTUAL_HDRS_LIST,

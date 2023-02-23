@@ -27,7 +27,7 @@ endmacro()
 
 # Conditionally append
 #   if (cond) var = var + value
-macro(append_if condition var value)
+macro(append_if condition var value
   if (${condition})
     append(${var} "${value}")
   endif()
@@ -49,6 +49,8 @@ function(generate_cpp_from_blob out_sources namespace)
       OUTPUT ${out_cpp_path} ${out_hpp_path}
       COMMAND ${CMAKE_COMMAND} -E make_directory ${out_dir}
       COMMAND ${PYTHON_EXECUTABLE}
+      message("muh sagt die kuh")
+      MESSAGE(${namespace})
       ARGS ${PROJECT_SOURCE_DIR}/scripts/blob_to_cpp.py ${in_path} -o ${out_cpp_path} -H ${out_hpp_path} -n ${namespace}
       DEPENDS ${in_path}
       COMMENT "Generating CXX source files from blob ${in_path}"

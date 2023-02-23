@@ -81,7 +81,7 @@ Thumbs.db
 *.ppm
 
 # Build directories
-/build*
+#/build*
 
 # Dependencies
 /deps
@@ -90,3 +90,6 @@ Thumbs.db
 include/OpenImageDenoise/config.h
 core/export.linux.map
 core/export.macos.map
+
+bazel-*
+mkl-dnn
