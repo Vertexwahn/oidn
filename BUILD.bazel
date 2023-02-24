@@ -225,8 +225,19 @@ cc_library(
     ],
 )
 
+cc_binary(
+    name = "oidnDenoise",
+    srcs = [
+        "apps/oidnDenoise.cpp",
+        "apps/utils/arg_parser.h",
+        "apps/utils/image_io.cpp",
+        "apps/utils/image_io.h",
+    ],
+    deps = [":OpenImageDenoise"],
+)
+
 cc_test(
-    name = "test",
+    name = "oidnTest",
     srcs = [
         "apps/oidnTest.cpp",
         "apps/utils/image_io.cpp",
