@@ -18,18 +18,18 @@ bazel_skylib_workspace()
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-local_repository(
-    name = "rules_ispc",
-    path = "../../devertexwahn/rules_ispc",
-)
-
-#git_repository(
+#local_repository(
 #    name = "rules_ispc",
-#    commit = "0deccfa15c73ce93d3850e618cf647fe979d6fbc",
-#    #branch = "main",
-#    remote = "https://github.com/Vertexwahn/rules_ispc",
-#    shallow_since = "1669327440 +0100",
+#    path = "../../devertexwahn/rules_ispc",
 #)
+
+git_repository(
+    name = "rules_ispc",
+    commit = "334b2e324e5df2a3aaebfe7e3b922aeb4afe37b5",
+    #branch = "main",
+    remote = "https://github.com/parvit/rules_ispc",
+    shallow_since = "1669327440 +0100",
+)
 
 load("@rules_ispc//:fetch_ispc.bzl", "fetch_ispc")
 
